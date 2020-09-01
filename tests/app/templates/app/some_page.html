@@ -53,3 +53,14 @@ fill-200x200-c100
 original
 
 {% image page.image original %}
+
+<hr>
+
+width-400 as
+
+{% image page.image width-400 as img %}
+<br>
+url {{ img.url }}<br>
+alt {{ img.alt }}<br>
+width {{ img.width }}<br>
+height {{ img.height }}<br>

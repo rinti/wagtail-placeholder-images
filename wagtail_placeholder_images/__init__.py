@@ -6,56 +6,39 @@ class Placeholder:
     def __init__(self, spec, img):
         self.spec = spec
         self.method = spec.method
-        self.width = img.width
-        self.height = img.height
+        self.img = img
+        self.calculate_dimensions()
 
-    def get_height_url(self):
-        ratio = self.width / self.height
-        new_width = int(self.spec.size * ratio)
-
-        return settings.WAGTAIL_PLACEHOLDERIMAGES_SOURCE.format(
-            height=self.spec.size, width=new_width
-        )
-
-    def get_width_url(self):
-        ratio = self.width / self.height
-
-        new_height = int(self.spec.size / ratio)
-
-        return settings.WAGTAIL_PLACEHOLDERIMAGES_SOURCE.format(
-            width=self.spec.size, height=new_height
-        )
-
-    def get_scale_url(self):
-        ratio = self.spec.percent / 100
-
-        return settings.WAGTAIL_PLACEHOLDERIMAGES_SOURCE.format(
-            width=int(self.width * ratio), height=int(self.height * ratio)
-        )
-
-    def get_default_url(self):
-        width = self.spec.width
-        height = self.spec.height
-        return settings.WAGTAIL_PLACEHOLDERIMAGES_SOURCE.format(
-            width=width, height=height
-        )
-
-    def get_original_url(self):
-        return settings.WAGTAIL_PLACEHOLDERIMAGES_SOURCE.format(
-            width=self.width, height=self.height
-        )
+    def calculate_dimensions(self):
+        if self.method == "height":
+            ratio = self.img.width / self.img.height
+            new_width = int(self.spec.size * ratio)
+            self.width = new_width
+            self.height = self.spec.size
+        elif self.method == "width":
+            ratio = self.img.width / self.img.height
+            new_height = int(self.spec.size / ratio)
+            self.width = self.spec.size
+            self.height = new_height
+        elif self.method == "scale":
+            ratio = self.spec.percent / 100
+            self.height = int(self.img.height * ratio)
+            self.width = int(self.img.width * ratio)
+        elif self.method == "original":
+            self.height = self.img.height
+            self.width = self.img.width
+        else:
+            self.width = self.spec.width
+            self.height = self.spec.height
 
     def get_url(self):
-        if self.method == "height":
-            return self.get_height_url()
-        elif self.method == "width":
-            return self.get_width_url()
-        elif self.method == "scale":
-            return self.get_scale_url()
-        elif self.method == "original":
-            return self.get_original_url()
+        return settings.WAGTAIL_PLACEHOLDERIMAGES_SOURCE.format(
+            height=self.height, width=self.width
+        )
 
-        return self.get_default_url()
+    @property
+    def url(self):
+        return self.get_url()
 
     def img_tag(self, _):
         return mark_safe('<img src="{}">'.format(self.get_url()))
