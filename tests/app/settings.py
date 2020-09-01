@@ -22,6 +22,7 @@ DATABASES = {
     }
 }
 
+# Uncomment this to test the "Original Images page"
 WAGTAILIMAGES_IMAGE_MODEL = "app.CustomImage"
 
 STATIC_URL = "/static/"
