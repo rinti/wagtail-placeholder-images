@@ -35,7 +35,7 @@ AbstractImage.get_placeholder_rendition = PlaceholderRenditionMixin.get_placehol
 AbstractImage.get_rendition = PlaceholderRenditionMixin.get_rendition
 ```
 
-Then you have to set `WAGTAIL_PLACEHOLDERIMAGES_DUMMY` to `True` and use your desired placeholder soure by setting `WAGTAIL_PLACEHOLDERIMAGES_SOURCE`. This should be done in your development settings file, so this doesn't get enabled on your servers. E.g.
+Then you have to set `WAGTAIL_PLACEHOLDERIMAGES_DUMMY` to `True` and use your desired placeholder source by setting `WAGTAIL_PLACEHOLDERIMAGES_SOURCE`. This should be done in your development settings file, so this doesn't get enabled on your servers. E.g.
 
 ```python
 # settings_dev.py
