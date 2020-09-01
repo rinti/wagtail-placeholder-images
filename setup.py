@@ -15,6 +15,7 @@ setup(
     version=version,
     description="Adds ability to use placeholder images for local development",
     long_description=readme,
+    long_description_content_type="text/markdown",
     author="Andreas Bernacca",
     author_email="ante.bernacca@gmail.com",
     install_requires=["wagtail>=2.7",],
