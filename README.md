@@ -1,0 +1,1 @@
+# wagtial placeholder images
