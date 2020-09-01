@@ -1,5 +1,7 @@
+from collections import OrderedDict
 from django.conf import settings
 from django.utils.safestring import mark_safe
+from django.forms.utils import flatatt
 
 
 class Placeholder:
@@ -37,8 +39,29 @@ class Placeholder:
         )
 
     @property
+    def alt(self):
+        return "Lorem ipsum"
+
+    @property
+    def attrs(self):
+        return flatatt(self.attrs_dict)
+
+    @property
+    def attrs_dict(self):
+        return OrderedDict(
+            [
+                ("src", self.url),
+                ("width", self.width),
+                ("height", self.height),
+                ("alt", self.alt),
+            ]
+        )
+
+    @property
     def url(self):
         return self.get_url()
 
-    def img_tag(self, _):
-        return mark_safe('<img src="{}">'.format(self.get_url()))
+    def img_tag(self, extra_attributes={}):
+        attrs = self.attrs_dict.copy()
+        attrs.update(extra_attributes)
+        return mark_safe('<img{}>'.format(flatatt(attrs)))

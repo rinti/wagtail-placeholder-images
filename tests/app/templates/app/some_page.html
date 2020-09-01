@@ -64,3 +64,16 @@ url {{ img.url }}<br>
 alt {{ img.alt }}<br>
 width {{ img.width }}<br>
 height {{ img.height }}<br>
+attrs {{ img.attrs }}<br>
+
+<hr>
+
+format-jpeg
+
+{% image page.image width-400 format-jpeg %}
+
+<hr>
+
+format-jpeg reverse order
+
+{% image page.image format-jpeg width-400 %}
