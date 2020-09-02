@@ -1,6 +1,6 @@
 [![PyPI version](https://badge.fury.io/py/wagtail-placeholder-images.svg)](https://badge.fury.io/py/wagtail-placeholder-images)
 
-# wagtial placeholder images
+# wagtail placeholder images
 
 This is a package for using placeholder images when developing which can be useful if you're storing them on a server and don't want to download them or link directly to the server when working locally.
 
